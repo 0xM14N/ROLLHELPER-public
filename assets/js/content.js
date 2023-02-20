@@ -198,9 +198,7 @@ intLookForPopup = setInterval(function(){
                 itemInfo.weapon = weaponName.innerText
 
                 sendWebHookDiscord(webhook,webhookType = 'IncommingTrade', itemInfo)
-
-                document.querySelector("body > div.cdk-overlay-container > div.cdk-overlay-backdrop.back" +
-                    "ground-unset.cdk-overlay-backdrop-showing").click()
+                document.querySelector("body > div.cdk-overlay-container > div.cdk-overlay-backdrop.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing").click()
             }
         }
     }
