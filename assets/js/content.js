@@ -1,7 +1,7 @@
 // CONFIG
 webhook = 'INSERT-WEBHOOK-URL-HERE'
 depoAutoAccept = true
-withdrawNotify = true
+withdrawNotify = false
 //-----------------------------------
 
 const itemInfo = {};
