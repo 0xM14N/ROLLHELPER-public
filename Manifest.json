@@ -1,0 +1,35 @@
+{
+  "name": "ROLLHELPER",
+  "description": "Helping the traders on csgoroll.com",
+  "version": "0.3.1",
+  "author": "TG",
+  "manifest_version": 3,
+  "icons": {
+    "16": "assets/ico/coin-ico.png",
+    "32": "assets/ico/coin-ico.png",
+    "48": "assets/ico/coin-ico-large.png",
+    "128": "assets/ico/coin-ico-large.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.csgoroll.com/*"],
+      "js": ["assets/js/content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "assets/popup/popup.html",
+    "scripts": [
+        "assets/popup/popup.js"],
+    "default_icon": {
+      "16": "assets/ico/coin-ico.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.csgoroll.com/*"
+  ]
+}
