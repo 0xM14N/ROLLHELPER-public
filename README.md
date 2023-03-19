@@ -17,7 +17,7 @@
 - Coins counter button
 - Deposit page: PRICE-CHECK: Shows wheter the item is Undervalued, Overvalued, Good priced
 
-
+- Addon popup is inactive
 
 ![image](https://user-images.githubusercontent.com/43382783/226195068-8ea21e4c-dc53-4474-8c08-0f6e8a3daf97.png)
 
