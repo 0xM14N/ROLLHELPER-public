@@ -129,9 +129,17 @@ function setBuffValue(item) {
     let priceInfo = pricesList[itemName];
     if (priceInfo === undefined) return;
 
-    let tbuffVal = priceInfo.buff163.starting_at.price / 0.66;
-    let buffVal = Math.floor(tbuffVal * 100) / 100
     let rollPrice = item.querySelector('footer > div:nth-child(2) > div > cw-pretty-balance > span').innerText
+    if (rollPrice < 100) {
+        var tbuffVal = priceInfo.buff163.starting_at.price / 0.62
+    }
+    else{
+        var tbuffVal = priceInfo.buff163.starting_at.price / 0.66
+    }
+
+
+    let buffVal = Math.floor(tbuffVal * 100) / 100
+
     let calc =  Math.floor(rollPrice/buffVal*100) - 100
     let parent_el = item.querySelector("footer");
 
