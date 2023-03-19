@@ -1,10 +1,11 @@
-// CONFIG --> insert private discord webhook  + set true / false
-webhook = 'INSERT-WEBHOOK-URL-HERE'
+// CONFIG
+webhook = 'INSERT-YOUR-PRIVATE-WEBHOOK-HERE'
 depoAutoAccept = true
 withdrawNotify = true
 //-----------------------------------
 
 const itemInfo = {};
+var pricesList = {};
 
 var sendWebHookDiscord = (urlDiscordWebhook = webhook, webhookType, scrapedData = {} ,embeds = []) => {
     const url = urlDiscordWebhook
@@ -139,13 +140,13 @@ const intAddEventListeners = setInterval(async function(){
                 for (i = 0; i < cancelNodes.length; i++) {
                     cancelNodes[i].click()
                 };
-            } catch (e) {console.log(e)}
+            } catch (e) {}
         })
 
         // Event listener for coin counter button
         coinCounterButton.addEventListener('click', async function() {
-            
-	    // Coin counting script
+            // Coin counting script
+
             try{
                 var inv = document.querySelector("cw-steam-inventory-search-grid > form > div.ml-3 > cw-pretty-balance > span").textContent
                 var balance = document.querySelector("cw-pretty-balance > span").textContent
@@ -170,41 +171,36 @@ const intAddEventListeners = setInterval(async function(){
     }
 },50)
 
-
-// NOTIFICATIONS
 intLookForPopup = setInterval(function(){
     let tempTradeInfo = itemInfo.weapon
 
+    // DEPOSIT AUTO-ACCEPT + DC NOTIFICATION
     if (popup = document.querySelector("body > div.cdk-overlay-container")){
-        //  DEPOSIT AUTOACCEPT + NOTIFY
         if (depoReadyBtn = popup.querySelector("cw-deposit-joined-dialog button")){
             if(depoAutoAccept){
                 depoReadyBtn.click()
-                setTimeout(function (){
-                    const lookForScrape = setInterval(function(){
-                        if (weaponName = document.querySelector("cw-deposit-processing-dialog > mat-dialog-content > cw-item")) {
-                            clearInterval(lookForScrape)
-                            itemInfo.weapon =  weaponName.innerText
-                            sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo)
-                        }
-                    },100)
-                    // add info about withdrawer (steam name)
-                },2000)
+
+                const intLookForScrape = setInterval(function(){
+                    if(weaponName = document.querySelector("cw-deposit-processing-dialog > mat-dialog-content > cw-item")){
+                        clearInterval(intLookForScrape)
+
+                        itemInfo.weapon =  weaponName.innerText
+                        if (typeof tempTradeInfo == "undefined") sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo);
+                        if (tempTradeInfo !== itemInfo.weapon) sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo);
+                    }
+                })
             }
         }
 
-        // WITHDRAW NOTIFY
+        // WITHDRAW DC NOTIFICATION
         if (offersBtn = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-actions > a > span.mat-button-wrapper > span")){
             if (withdrawNotify){
+
                 let tradeInfo = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-content > cw-item")
                 itemInfo.weapon = tradeInfo.innerText
 
-                if (typeof tempTradeInfo == "undefined"){
-                    sendWebHookDiscord(webhook,swebhookType = 'IncommingTrade', itemInfo)
-                }
-                if (tempTradeInfo !== itemInfo.weapon){
-                    sendWebHookDiscord(webhook,swebhookType = 'IncommingTrade', itemInfo)
-                }
+                if (typeof tempTradeInfo == "undefined") sendWebHookDiscord(webhook,swebhookType = 'IncommingTrade', itemInfo)
+                if (tempTradeInfo !== itemInfo.weapon) sendWebHookDiscord(webhook,swebhookType = 'IncommingTrade', itemInfo)
             }
         }
     }

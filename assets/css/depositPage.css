@@ -1,0 +1,234 @@
+div.orange-square {
+    background-color: #cd0a0a;
+}
+
+div.green-square {
+    background-color: #00C74D;
+}
+
+div.red-square {
+    background-color: #1f389c;
+}
+
+div.price-detail-info {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+div.square-info {
+    border-radius: 2px;
+    margin-right: 34px;
+    width: 0px;
+    height: 0px;
+}
+
+select.sorter-select {
+    height: 2rem;
+    color: #FFF;
+    word-wrap: normal;
+    background-color: #1A1E23;
+    border: none;
+    border-radius: 5px;
+}
+
+div.show-trade-locked-items {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    margin: 5px
+}
+
+label.show-trade-locked-items {
+    margin: 0px 0px 0px 6px;
+}
+
+input.show-trade-locked-items {
+    width: 20px;
+    height: 20px;
+}
+
+/* sorter */
+.sort-button {
+    height: 1.8rem;
+    margin: 0.5rem;
+    font-size: 0.9rem;
+    font-family: Flama, Roboto, "Helvetica Neue", sans-serif;
+    border: none;
+    background-color: rgb(2 187 74);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.sort-button:hover {
+    background-color: #12d82a;
+    color: #fff;
+}
+
+.custom-search-grid-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.fetch-csgoroll-selling-prices {
+    height: 1.7rem;
+    margin: 0.5rem;
+    font-size: 0.9rem;
+    font-family: Flama, Roboto, "Helvetica Neue", sans-serif;
+    border: none;
+    background-color: rgb(2 187 74);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.fetch-csgoroll-selling-prices:hover {
+    background-color: #12d82a;
+    color: #fff;
+}
+
+.div-select-sorter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.selects-sorter {
+    display: flex;
+    align-items: center;
+}
+
+.sorter-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+div.profits {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectable.good-price {
+    background-color: rgba(0, 96, 12, 0.6) !important;
+}
+
+.selectable.higher-price {
+    background-color: rgba(242, 79, 0, 0.6) !important;
+}
+
+.selectable.lower-price {
+    background-color: rgba(147, 16, 16, 0.6) !important;
+}
+
+.depleted.good-price {
+    background-color: rgba(0, 96, 12, 0.3) !important;
+}
+
+.depleted.higher-price {
+    background-color: rgba(242, 79, 0, 0.3) !important;
+}
+
+.depleted.lower-price {
+    background-color: rgba(147, 16, 16, 0.3) !important;
+}
+
+.locked.good-price {
+    background-color: rgba(0, 96, 12, 0.2) !important;
+}
+
+.locked.higher-price {
+    background-color: rgba(242, 79, 0, 0.2) !important;
+}
+
+.locked.lower-price {
+    background-color: rgba(147, 16, 16, 0.3) !important;
+}
+
+
+.selectable .item-info {
+    opacity: 1;
+}
+
+.depleted .item-info {
+    opacity: 0.3;
+}
+
+.locked .item-info > *:not(.item-info-container){
+    opacity: 0.3;
+}
+
+cw-item {
+    opacity: 1!important;
+}
+
+.context-menu {
+    position: fixed;
+    z-index: 10000;
+    width: 150px;
+    background-color: #1b1a1a;
+    border-radius: 5px;
+    display: none;
+}
+
+.context-menu.visible {
+    display: block;
+}
+
+.context-menu .item{
+    padding: 8px 10px;
+    font-size: 15px;
+    color: #eee;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+.context-menu .item:hover{
+    background-color: #343434;
+}
+
+.provider-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.provider-option img {
+    margin-right: 2px;
+}
+
+div.loading {
+    width: 20px;
+    height: 20px;
+    border: 3px solid;
+    border-color: #0084ff #e6e6e6 #e6e6e6;
+    border-radius: 50px;
+    animation: loading 1.2s infinite;
+}
+
+@keyframes loading{
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.highlighted-yellow {
+    color: #e3e30d;
+}

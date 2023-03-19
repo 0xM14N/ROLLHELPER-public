@@ -10,17 +10,17 @@
 ------------
 
 ### Current functions
-- Deposit Auto-accept
-- Deposit Discord notifications
-- Withdraw Discord notifications
-- Mass De-List button
-- Coins counter button
-- Deposit page: PRICE-CHECK: Shows wheter the item is Undervalued, Overvalued, Good priced
+- Counting up coins (balance + inventory) and copying the value - make sure you are on depo page with refreshed inventory for accurate sum
+- Mass De-Listing of skins (faster than manual) - better for reDepo
+- Automatic depo auto-accept (as for now, is turned on automatically - switch doesnt work)
+- DC Notifications (set webhook in assets/js/content.js at the top)
 
-- Addon popup is inactive
 
-![image](https://user-images.githubusercontent.com/43382783/226195068-8ea21e4c-dc53-4474-8c08-0f6e8a3daf97.png)
 
-![image](https://user-images.githubusercontent.com/43382783/226195058-a11a30c3-3d9a-4bb0-8849-6383289d913f.png)
 
-![image](https://user-images.githubusercontent.com/43382783/226195091-a47d8102-fe48-4250-8a54-a1f1ac05dc19.png)
+
+
+![image](https://user-images.githubusercontent.com/43382783/215156146-ed175d3a-cadd-4cd4-bbe3-6e10d6ba0ccf.png)
+</br>
+![image](https://user-images.githubusercontent.com/43382783/215156125-8a07647d-6a87-40bd-a6f8-54bb6691a3c1.png)</br>
+

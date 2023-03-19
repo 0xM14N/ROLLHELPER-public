@@ -1,7 +1,7 @@
 {
   "name": "ROLLHELPER",
   "description": "Helping the traders on csgoroll.com",
-  "version": "0.3.1",
+  "version": "0.5.1",
   "author": "TG",
   "manifest_version": 3,
   "icons": {
@@ -10,10 +10,18 @@
     "48": "assets/ico/coin-ico-large.png",
     "128": "assets/ico/coin-ico-large.png"
   },
+  "background": {
+    "service_worker": "assets/js/background.js"
+  },
   "content_scripts": [
     {
       "matches": ["https://www.csgoroll.com/*"],
       "js": ["assets/js/content.js"]
+    },
+    {
+      "matches": ["https://www.csgoroll.com/en/top-up/steam/csgo"],
+      "js": ["assets/js/deposit.js"],
+      "css": ["assets/css/depositPage.css"]
     }
   ],
   "action": {
@@ -30,6 +38,7 @@
     "tabs"
   ],
   "host_permissions": [
-    "https://www.csgoroll.com/*"
+    "https://www.csgoroll.com/*",
+    "https://prices.csgotrader.app/latest/prices_v6.json"
   ]
 }
