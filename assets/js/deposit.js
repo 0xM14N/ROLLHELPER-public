@@ -130,6 +130,7 @@ function setBuffValue(item) {
     if (priceInfo === undefined) return;
 
     let rollPrice = item.querySelector('footer > div:nth-child(2) > div > cw-pretty-balance > span').innerText
+
     if (rollPrice < 100) {
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.62
     }
@@ -137,9 +138,7 @@ function setBuffValue(item) {
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.66
     }
 
-
     let buffVal = Math.floor(tbuffVal * 100) / 100
-
     let calc =  Math.floor(rollPrice/buffVal*100) - 100
     let parent_el = item.querySelector("footer");
 
@@ -148,7 +147,8 @@ function setBuffValue(item) {
 }
 
 // Check price, good pricing can differentiate +-3% buff price
-// Items under 100coins are wrongly priced for now
+// for pricing is used buff starting at - which is not the most accurate
+// but good enough for overview
 function checkPrice(rollPrice, buffPrice){
     let suggestedPrice = buffPrice;
     let x = rollPrice / suggestedPrice;
