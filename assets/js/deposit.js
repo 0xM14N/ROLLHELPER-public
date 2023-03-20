@@ -131,8 +131,11 @@ function setBuffValue(item) {
 
     let rollPrice = item.querySelector('footer > div:nth-child(2) > div > cw-pretty-balance > span').innerText
 
-    if (rollPrice < 100) {
+    if (rollPrice < 200 && !itemName.includes('Knife') && !itemName.includes('Daggers') && !itemName.includes('Gloves')&& !itemName.includes('Wraps')) {
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.62
+    }
+    else if (itemName.includes('Tiger Tooth')){
+        var tbuffVal = priceInfo.buff163.starting_at.price / 0.65
     }
     else{
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.66
