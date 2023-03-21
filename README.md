@@ -16,6 +16,7 @@
 - Mass deposit de-list button
 - Coins counter button
 - Deposit page: Pricing checked by buff163, checks if the items are: Overpriced / Underpriced / Good priced
+- !!! Pricings should not be considered as most accurate at the current time...
 - addon pop-up is dead - doesn't work for now
 
 
