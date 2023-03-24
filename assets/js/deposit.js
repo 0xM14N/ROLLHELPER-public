@@ -105,20 +105,20 @@ function setBuffValue(item) {
     if (item.querySelector("footer > div:nth-child(1) > div:nth-child(2)")) {
         let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
         let nameArr = skin.split(' ')
-        let first = nameArr[0]
-        let second = nameArr[1]
+        let f = nameArr[0]
+        let s = nameArr[1]
 
-        if (first == 'Doppler'){
+        if (f == 'Doppler'){
             itemInfo.skinName = 'Doppler'
             itemName += " | " + 'Doppler'
-            var phase = nameArr[1] + ' ' + nameArr[2]
+            var phase = s + ' ' + nameArr[2]
         }
 
-        else if (first == 'Ruby' || first == 'Sapphire' || first == 'Emerald'){
-            itemInfo.skinName = first
+        else if ((nameArr.length === 1) && (f == 'Ruby' || f == 'Sapphire' || f == 'Emerald')){
+            itemInfo.skinName = f
             itemName += " | " + 'Doppler'
-            if (second == 'Pearl') phase = skin
-            else var phase = first
+            if (s == 'Pearl') phase = skin
+            else var phase = f
         }
 
         else{
