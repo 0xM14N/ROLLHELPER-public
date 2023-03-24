@@ -121,7 +121,10 @@ function setBuffValue(item) {
             else var phase = f
         }
 
-        else if (itemInfo.skinWeapon.includes('Case')){}
+        else if (itemInfo.skinWeapon.includes('Case') ||
+                itemInfo.skinWeapon.includes('Pin')){
+            //continue
+        }
 
         else{
             itemInfo.skinName = skin
