@@ -179,6 +179,6 @@ function checkPrice(rollPrice, buffPrice){
     let val = rollPrice / buffPrice;
 
     if (val > 1.03) return "Overpriced";
-    if (val <= 1.03 && x >= 0.97) return "Goodpriced";
+    if (val <= 1.03 && val >= 0.97) return "Goodpriced";
     if (val < 0.97) return "Underpriced";
 }
