@@ -88,7 +88,6 @@ function drawCustomForm(calcRes, calc) {
     if (calcRes == 'Underpriced') n.appendChild(c);
     if (calcRes == 'Goodpriced')  n.appendChild(o);
 
-
     grandForm.appendChild(n);
     return grandForm;
 }
@@ -105,9 +104,27 @@ function setBuffValue(item) {
     // skin name
     if (item.querySelector("footer > div:nth-child(1) > div:nth-child(2)")) {
         let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
+        let nameArr = skin.split(' ')
+        let first = nameArr[0]
+        let second = nameArr[1]
 
-        itemInfo.skinName = skin
-        itemName += " | " + skin;
+        if (first == 'Doppler'){
+            itemInfo.skinName = 'Doppler'
+            itemName += " | " + 'Doppler'
+            var phase = nameArr[1] + ' ' + nameArr[2]
+        }
+
+        else if (first == 'Ruby' || first == 'Sapphire' || first == 'Emerald'){
+            itemInfo.skinName = first
+            itemName += " | " + 'Doppler'
+            if (second == 'Pearl') phase = skin
+            else var phase = first
+        }
+
+        else{
+            itemInfo.skinName = skin
+            itemName += " | " + skin
+        }
     }
 
     // skin exterior for selectable
@@ -126,17 +143,23 @@ function setBuffValue(item) {
         itemName += " (" + exterior + ")";
     }
 
+    // PRICING FROM: BUFF163 STARTING_AT VALUE
     let priceInfo = pricesList[itemName];
     if (priceInfo === undefined) return;
 
-    let rollPrice = item.querySelector('footer > div:nth-child(2) > div > cw-pretty-balance > span').innerText
-
-    if (rollPrice < 200 && !itemName.includes('Knife') && !itemName.includes('Daggers') && !itemName.includes('Gloves')&& !itemName.includes('Wraps')) {
+    if (rollPrice < 200 && !itemName.includes('Knife') && !itemName.includes('Daggers') && !itemName.includes('Gloves')&& !itemName.includes('Wraps') && !itemName.includes('Doppler')) {
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.62
     }
+
+    else if (itemName.includes('Doppler')){
+        var price = priceInfo.buff163.starting_at.doppler
+        var tbuffVal = price[phase] / 0.64
+    }
+
     else if (itemName.includes('Tiger Tooth')){
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.65
     }
+
     else{
         var tbuffVal = priceInfo.buff163.starting_at.price / 0.66
     }
@@ -144,19 +167,16 @@ function setBuffValue(item) {
     let buffVal = Math.floor(tbuffVal * 100) / 100
     let calc =  Math.floor(rollPrice/buffVal*100) - 100
     let parent_el = item.querySelector("footer");
-
     let res = checkPrice(rollPrice, buffVal)
+
     parent_el.appendChild(drawCustomForm(res, calc));
 }
 
-// Check price, good pricing can differentiate +-3% buff price
-// for pricing is used buff starting at - which is not the most accurate
-// but good enough for overview
-function checkPrice(rollPrice, buffPrice){
-    let suggestedPrice = buffPrice;
-    let x = rollPrice / suggestedPrice;
 
-    if (x > 1.03) return "Overpriced";
-    if (x <= 1.03 && x >= 0.97) return "Goodpriced";
-    if (x < 0.97) return "Underpriced";
+function checkPrice(rollPrice, buffPrice){
+    let val = rollPrice / buffPrice;
+
+    if (val > 1.03) return "Overpriced";
+    if (val <= 1.03 && x >= 0.97) return "Goodpriced";
+    if (val < 0.97) return "Underpriced";
 }
