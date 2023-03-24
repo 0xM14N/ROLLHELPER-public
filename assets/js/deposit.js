@@ -121,6 +121,8 @@ function setBuffValue(item) {
             else var phase = f
         }
 
+        else if (itemInfo.skinWeapon.includes('Case')){}
+
         else{
             itemInfo.skinName = skin
             itemName += " | " + skin
@@ -143,6 +145,7 @@ function setBuffValue(item) {
         itemName += " (" + exterior + ")";
     }
 
+        console.log(itemName)
     // PRICING FROM: BUFF163 STARTING_AT VALUE
     let priceInfo = pricesList[itemName];
     if (priceInfo === undefined) return;
