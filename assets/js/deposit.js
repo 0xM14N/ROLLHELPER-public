@@ -1,4 +1,4 @@
-let excludedItemsFrom62 = ['Knife','Daggers','Gloves','Wraps','Doppler','CS:GO','Pin'];
+let excludedItemsFrom62 = ['Knife','Daggers','Gloves','Wraps','Doppler','CS:GO'];
 var pricesList = {};
 
 let blue = '\x1b[36m%s\x1b[0m';
