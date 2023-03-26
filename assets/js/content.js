@@ -11,7 +11,7 @@ var sendWebHookDiscord = (urlDiscordWebhook = webhook, webhookType, scrapedData 
     const url = urlDiscordWebhook
     const templateWebhook = {
         "areYouReady": {
-            "username": `DEPOBOT`,
+            "username": `DEPOSIT`,
             "avatar_url": 'https://pbs.twimg.com/profile_images/1610084878720049154/n0j4nld9_400x400.png',
             "content": ``,
             "embeds": [
@@ -30,7 +30,7 @@ var sendWebHookDiscord = (urlDiscordWebhook = webhook, webhookType, scrapedData 
             ]
         },
         "IncommingTrade": {
-            "username": `WITHDRAWBOT`,
+            "username": `WITHDRAW`,
             "avatar_url": 'https://pbs.twimg.com/profile_images/1610084878720049154/n0j4nld9_400x400.png',
             "content": ``,
             "embeds": [
