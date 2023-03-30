@@ -1,4 +1,4 @@
-let excludedItemsFrom62 = ['Knife','Daggers','Gloves','Wraps','Doppler','CS:GO'];
+let excludedItemsFrom62 = ['Knife','Daggers','Gloves','Wraps','Doppler','CS:GO','Battle-Scared','Well-Worn'];
 var pricesList = {};
 
 let blue = '\x1b[36m%s\x1b[0m';
@@ -77,9 +77,9 @@ function drawCustomForm(calcRes, calc) {
     i.classList.add("square-info");
     i.classList.add("green-square");
 
-     o.appendChild(i);
-     o.style.color = '#00C74D';
-     o.innerHTML += "✔ " + calc + " %";
+    o.appendChild(i);
+    o.style.color = '#00C74D';
+    o.innerHTML += "✔ " + calc + " %";
 
     var c = document.createElement("div");
     c.classList.add("price-detail-info");
@@ -238,20 +238,22 @@ function setBuffValue(item) {
 
     parent_el.appendChild(drawCustomForm(res, calc));
 
-    // logs of the item pricings into console
-    log(blue,`${itemName}`)
-    log(yellow,`\t ROLL PRICE: ${rollPrice} coins`)
-    log(yellow,`\t BUFF PRICE: ${buff}$`)
-    log(yellow,`\t SUGGESTED : ${buffVal} coins`)
+    // LOGS INTO CONSOLE ABOUT PRICINGS => Uncomment if you want to
+    // see more info about items and how they are calculated
 
-    if(res === 'Overpriced' ) log(yellow,`\t DIFF: ${calc} %`)
-    if(res === 'Goodpriced' ) log(yellow,`\t DIFF: ${calc} %`)
-    if(res === 'Underpriced') log(yellow,`\t DIFF: ${calc} %`)
+    //log(blue,`${itemName}`)
+    //log(yellow,`\t ROLL PRICE: ${rollPrice} coins`)
+    //log(yellow,`\t BUFF PRICE: ${buff}$`)
+    //log(yellow,`\t SUGGESTED : ${buffVal} coins`)
 
-    if(is062) log(yellow,`\t USED RATIO: 0.62`)
-    if(is064) log(yellow,`\t USED RATIO: 0.64`)
-    if(is065) log(yellow,`\t USED RATIO: 0.65`)
-    if(is066) log(yellow,`\t USED RATIO: 0.66`)
+    //if(res === 'Overpriced' ) log(yellow,`\t DIFF: ${calc} %`)
+    //if(res === 'Goodpriced' ) log(yellow,`\t DIFF: ${calc} %`)
+    //if(res === 'Underpriced') log(yellow,`\t DIFF: ${calc} %`)
+
+    //if(is062) log(yellow,`\t USED RATIO: 0.62`)
+    //if(is064) log(yellow,`\t USED RATIO: 0.64`)
+    //if(is065) log(yellow,`\t USED RATIO: 0.65`)
+    //if(is066) log(yellow,`\t USED RATIO: 0.66`)
 }
 
 // eval wheter the item is OP/UNDERP/GOOD priced
