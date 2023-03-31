@@ -68,7 +68,7 @@ function drawCustomForm(calcRes, calc) {
     r.classList.add("price-detail-info");
     r.appendChild(a);
     r.style.color = "#cd0a0a";
-    r.innerHTML += "🚨 +" + calc + " %";
+    r.innerHTML += "🔴 +" + calc + " %";
 
     var o = document.createElement("div");
     o.classList.add("price-detail-info");
