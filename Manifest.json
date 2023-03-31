@@ -55,6 +55,8 @@
   ],
   "host_permissions": [
     "https://www.csgoroll.com/*",
+    "https://www.csgorolltr.com/*",
+    "https://www.csgoroll.gg/*",
     "https://prices.csgotrader.app/latest/prices_v6.json"
   ]
 }
