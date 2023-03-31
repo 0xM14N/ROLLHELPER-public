@@ -79,7 +79,7 @@ function drawCustomForm(calcRes, calc) {
 
     o.appendChild(i);
     o.style.color = '#00C74D';
-    o.innerHTML += "✔ " + calc + " %";
+    o.innerHTML += "🟢" + calc + " %";
 
     var c = document.createElement("div");
     c.classList.add("price-detail-info");
@@ -104,10 +104,7 @@ function drawCustomForm(calcRes, calc) {
 function setBuffValue(item) {
     var itemInfo = {};
     let itemName = '';
-    let is062  = false;
-    let is064 = false;
-    let is065 = false;
-    let is066 = false;
+    let is062,is064,is065,is066 = false;
 
 
     //  weapon type
@@ -194,8 +191,8 @@ function setBuffValue(item) {
     // if the constructed name of skin was not found in the JSON price file go to next item
     if (priceInfo === undefined) return;
 
-    let rollPrice = item.querySelector('footer > div:nth-child(2) > div >' +
-        ' cw-pretty-balance > span').innerText.replace(',','')
+    let rollPrice = Math.floor(item.querySelector('footer > div:nth-child(2) > div >' +
+        ' cw-pretty-balance > span').innerText.replace(',','') * 100) / 100;
 
     // Find if item is priced by 0.62 by excluded keywords - bad approach
     // playskins for weapon finishes bellow 200c usually belong in this category
@@ -260,8 +257,8 @@ function setBuffValue(item) {
 // diff +-3% is considered as good priced
 // over or under that it's overpriced / underpriced
 function checkPrice(rollPrice, buffPrice){
-    let val = rollPrice / buffPrice;
-
+    let v = rollPrice / buffPrice;
+    let val = Math.floor(v * 100) / 100;
     if (val > 1.03) return "Overpriced";
     if (val <= 1.03 && val >= 0.97) return "Goodpriced";
     if (val < 0.97) return "Underpriced";
