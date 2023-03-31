@@ -1,4 +1,4 @@
-let excludedItemsFrom62 = ['Knife','Daggers','Gloves','Wraps','Doppler','CS:GO','Battle-Scared','Well-Worn'];
+let excludedItemsFrom62 = ['Knife','Daggers','Gloves','Wraps','Doppler','CS:GO','Battle-Scarred','Well-Worn'];
 var pricesList = {};
 
 let blue = '\x1b[36m%s\x1b[0m';
@@ -241,19 +241,19 @@ function setBuffValue(item) {
     // LOGS INTO CONSOLE ABOUT PRICINGS => Uncomment if you want to
     // see more info about items and how they are calculated
 
-    //log(blue,`${itemName}`)
-    //log(yellow,`\t ROLL PRICE: ${rollPrice} coins`)
-    //log(yellow,`\t BUFF PRICE: ${buff}$`)
-    //log(yellow,`\t SUGGESTED : ${buffVal} coins`)
+    log(blue,`${itemName}`)
+    log(yellow,`\t ROLL PRICE: ${rollPrice} coins`)
+    log(yellow,`\t BUFF PRICE: ${buff}$`)
+    log(yellow,`\t SUGGESTED : ${buffVal} coins`)
 
-    //if(res === 'Overpriced' ) log(yellow,`\t DIFF: ${calc} %`)
-    //if(res === 'Goodpriced' ) log(yellow,`\t DIFF: ${calc} %`)
-    //if(res === 'Underpriced') log(yellow,`\t DIFF: ${calc} %`)
+    if(res === 'Overpriced' ) log(yellow,`\t DIFF: ${calc} %`)
+    if(res === 'Goodpriced' ) log(yellow,`\t DIFF: ${calc} %`)
+    if(res === 'Underpriced') log(yellow,`\t DIFF: ${calc} %`)
 
-    //if(is062) log(yellow,`\t USED RATIO: 0.62`)
-    //if(is064) log(yellow,`\t USED RATIO: 0.64`)
-    //if(is065) log(yellow,`\t USED RATIO: 0.65`)
-    //if(is066) log(yellow,`\t USED RATIO: 0.66`)
+    if(is062) log(yellow,`\t USED RATIO: 0.62`)
+    if(is064) log(yellow,`\t USED RATIO: 0.64`)
+    if(is065) log(yellow,`\t USED RATIO: 0.65`)
+    if(is066) log(yellow,`\t USED RATIO: 0.66`)
 }
 
 // eval wheter the item is OP/UNDERP/GOOD priced

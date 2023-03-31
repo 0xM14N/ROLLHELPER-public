@@ -15,13 +15,29 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.csgoroll.com/*"],
+      "matches": [
+        "https://www.csgoroll.com/*",
+        "https://www.csgoroll.gg/*",
+        "https://www.csgorolltr.com/*"
+      ],
       "js": ["assets/js/content.js"]
     },
     {
-      "matches": ["https://www.csgoroll.com/en/top-up/steam/csgo"],
+      "matches": [
+        "https://www.csgoroll.com/en/top-up/steam/csgo",
+        "https://www.csgoroll.gg/en/top-up/steam/csgo",
+        "https://www.csgorolltr.com/en/top-up/steam/csgo"
+      ],
       "js": ["assets/js/deposit.js"],
       "css": ["assets/css/depositPage.css"]
+    },
+    {
+      "matches": [
+        "https://www.csgoroll.com/en/crash",
+        "https://www.csgoroll.gg/en/crash",
+        "https://www.csgorolltr.com/en/crash"
+      ],
+      "js": ["assets/js/crash.js"]
     }
   ],
   "action": {
