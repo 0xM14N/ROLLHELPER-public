@@ -15,8 +15,9 @@
 - Withdraw Discord Notifications
 - Mass deposit de-list button
 - Coins counter button
+- Crash maintanance banner remover => to check prices (press F5 on crash page)
 - Deposit page: Pricing checked by buff163, checks if the items are: Overpriced / Underpriced / Good priced
-- !!! Pricings should not be considered as most accurate at the current time...
+- !!! Pricings should not be considered as the moste accurate (still in beta)!!!...
 - addon pop-up is dead - doesn't work for now
 ------------
 
