@@ -79,7 +79,7 @@ function drawCustomForm(calcRes, calc) {
 
     o.appendChild(i);
     o.style.color = '#00C74D';
-    o.innerHTML += "🟢" + calc + " %";
+    o.innerHTML += "🟢 " + calc + " %";
 
     var c = document.createElement("div");
     c.classList.add("price-detail-info");
