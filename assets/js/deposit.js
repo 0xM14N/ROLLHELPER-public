@@ -104,57 +104,71 @@ function drawCustomForm(calcRes, calc) {
 function setBuffValue(item) {
     var itemInfo = {};
     let itemName = '';
-    let is062,is064,is065,is066 = false;
+    let is062, is063, is064, is065, is066 = false;
+    let isSticker = false;
 
 
     //  weapon type
     itemInfo.skinWeapon = item.querySelector("footer > div:nth-child(1) > div:nth-child(1)").innerHTML.trim()
-    itemName += itemInfo.skinWeapon;
+    if(itemInfo.skinWeapon === 'Sticker'){
+        log('sticker detected')
+        isSticker = true;
+        itemName += 'Sticker | ';
+    }
+    else itemName += itemInfo.skinWeapon;
 
     // skin name
     if (item.querySelector("footer > div:nth-child(1) > div:nth-child(2)")) {
-        let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
-        let nameArr = skin.split(' ')
-        let f = nameArr[0]
-        let s = nameArr[1]
 
-        // if doppler has a phase
-        if (f == 'Doppler'){
-            itemInfo.skinName = 'Doppler'
-            itemName += " | " + 'Doppler'
-            var phase = s + ' ' + nameArr[2]
-        }
-
-        // if doppler is a gem
-        else if ((nameArr.length === 1) && (f == 'Ruby' || f == 'Sapphire')){
-            itemInfo.skinName = f
-            itemName += " | " + 'Doppler'
-            if (s == 'Pearl') phase = skin
-            else var phase = f
-        }
-
-        // if doppler is a gamma doppler
-        else if (f == 'Gamma' && s == 'Doppler'){
-            itemInfo.skinName = f + ' ' + s
-            itemName += " | " + 'Gamma Doppler'
-            var phase = nameArr[2] + ' ' + nameArr[3]
-        }
-        // if gamma doppler is a gem -> emerald
-        else if ((nameArr.length === 1) && f == 'Emerald'){
-            itemInfo.skinName = f
-            itemName += " | " + 'Gamma Doppler'
-            var phase = 'Emerald'
-        }
-
-        //if item is case / pin -> not every item is added yet
-        else if (itemInfo.skinWeapon.includes('Case') ||
-                 itemInfo.skinWeapon.includes('Pin')){
-            // continue
+        if (isSticker){
+            let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
+            itemName += skin;
         }
 
         else{
-            itemInfo.skinName = skin
-            itemName += " | " + skin
+            let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
+            let nameArr = skin.split(' ')
+            let f = nameArr[0]
+            let s = nameArr[1]
+
+            // if doppler has a phase
+            if (f == 'Doppler'){
+                itemInfo.skinName = 'Doppler'
+                itemName += " | " + 'Doppler'
+                var phase = s + ' ' + nameArr[2]
+            }
+
+            // if doppler is a gem
+            else if ((nameArr.length === 1) && (f == 'Ruby' || f == 'Sapphire')){
+                itemInfo.skinName = f
+                itemName += " | " + 'Doppler'
+                if (s == 'Pearl') phase = skin
+                else var phase = f
+            }
+
+            // if doppler is a gamma doppler
+            else if (f == 'Gamma' && s == 'Doppler'){
+                itemInfo.skinName = f + ' ' + s
+                itemName += " | " + 'Gamma Doppler'
+                var phase = nameArr[2] + ' ' + nameArr[3]
+            }
+            // if gamma doppler is a gem -> emerald
+            else if ((nameArr.length === 1) && f == 'Emerald'){
+                itemInfo.skinName = f
+                itemName += " | " + 'Gamma Doppler'
+                var phase = 'Emerald'
+            }
+
+            //if item is case / pin -> not every item is added yet
+            else if (itemInfo.skinWeapon.includes('Case') ||
+                itemInfo.skinWeapon.includes('Pin')){
+                // continue
+            }
+
+            else{
+                itemInfo.skinName = skin
+                itemName += " | " + skin
+            }
         }
     }
 
@@ -163,8 +177,26 @@ function setBuffValue(item) {
         let exterior = item.querySelector('cw-item > div:nth-child(2) > div:nth-child(2) > ' +
             'cw-item-variant-details > div > div').innerHTML.trim()
 
-        itemInfo.skinExterior = exterior
-        itemName += " (" + exterior + ")";
+        if (isSticker){
+            itemInfo.skinExterior = ' ('+ exterior + ')'
+            let nameArr = itemName.split(' ')
+            let f = 0
+            for (let i=0; i<nameArr.length;i++){
+                if (nameArr[i] === '|'){
+                    f++;
+                    if(f === 2){
+                        nameArr[i-1] += itemInfo.skinExterior;
+                        break;
+                    }
+                }
+            }
+            itemName = nameArr.join(' ')
+            log(itemName)
+        }
+        else{
+            itemInfo.skinExterior = exterior
+            itemName += " (" + exterior + ")";
+        }
     }
 
     // skin exterior (for non-selectable)
@@ -172,8 +204,25 @@ function setBuffValue(item) {
         let exterior = item.querySelector('cw-item > div:nth-child(1) > div:nth-child(2) > ' +
             'cw-item-variant-details > div > div').innerHTML.trim()
 
-        itemInfo.skinExterior = exterior
-        itemName += " (" + exterior + ")";
+        if (isSticker){
+            itemInfo.skinExterior = ' ('+ exterior + ')'
+            let nameArr = itemName.split(' ')
+            let f = 0
+            for (let i=0; i<nameArr.length;i++){
+                if (nameArr[i] === '|'){
+                    f++;
+                    if(f === 2){
+                        nameArr[i-1] += itemInfo.skinExterior;
+                        break;
+                    }
+                }
+            }
+            itemName = nameArr.join(' ')
+        }
+        else{
+            itemInfo.skinExterior = exterior
+            itemName += " (" + exterior + ")";
+        }
     }
 
     // ======================== PRICING ========================
@@ -248,6 +297,7 @@ function setBuffValue(item) {
     if(res === 'Underpriced') log(yellow,`\t DIFF: ${calc} %`)
 
     if(is062) log(yellow,`\t USED RATIO: 0.62`)
+    if(is063) log(yellow,`\t USED RATIO: 0.63`)
     if(is064) log(yellow,`\t USED RATIO: 0.64`)
     if(is065) log(yellow,`\t USED RATIO: 0.65`)
     if(is066) log(yellow,`\t USED RATIO: 0.66`)
