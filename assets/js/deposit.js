@@ -111,7 +111,6 @@ function setBuffValue(item) {
     //  weapon type
     itemInfo.skinWeapon = item.querySelector("footer > div:nth-child(1) > div:nth-child(1)").innerHTML.trim()
     if(itemInfo.skinWeapon === 'Sticker'){
-        log('sticker detected')
         isSticker = true;
         itemName += 'Sticker | ';
     }
@@ -165,6 +164,9 @@ function setBuffValue(item) {
                 // continue
             }
 
+            else if (!skin) {
+            }
+
             else{
                 itemInfo.skinName = skin
                 itemName += " | " + skin
@@ -193,6 +195,7 @@ function setBuffValue(item) {
             itemName = nameArr.join(' ')
             log(itemName)
         }
+
         else{
             itemInfo.skinExterior = exterior
             itemName += " (" + exterior + ")";
@@ -235,6 +238,7 @@ function setBuffValue(item) {
     // https://csgotrader.app/prices/
 
 
+    //log(itemName)
     let priceInfo = pricesList[itemName];
 
     // if the constructed name of skin was not found in the JSON price file go to next item
@@ -284,8 +288,7 @@ function setBuffValue(item) {
 
     parent_el.appendChild(drawCustomForm(res, calc));
 
-    // LOGS INTO CONSOLE ABOUT PRICINGS => Uncomment if you want to
-    // see more info about items and how they are calculated
+    // LOGS INTO CONSOLE ABOUT PRICINGS =
 
     log(blue,`${itemName}`)
     log(yellow,`\t ROLL PRICE: ${rollPrice} coins`)
