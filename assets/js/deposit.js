@@ -165,6 +165,7 @@ function setBuffValue(item) {
             }
 
             else if (!skin) {
+                // continue
             }
 
             else{
@@ -193,7 +194,6 @@ function setBuffValue(item) {
                 }
             }
             itemName = nameArr.join(' ')
-            log(itemName)
         }
 
         else{
@@ -237,7 +237,6 @@ function setBuffValue(item) {
     // prices.csgotrader.app/latest/prices_v6.json
     // https://csgotrader.app/prices/
 
-
     //log(itemName)
     let priceInfo = pricesList[itemName];
 
@@ -261,8 +260,8 @@ function setBuffValue(item) {
     // if the item is Doppler => Price with 0.64
     else if (itemName.includes('Doppler')){
         is064 = true
-        var buff = priceInfo.buff163.starting_at.doppler
-        var tbuffVal = buff[phase] / 0.64
+        var buff = priceInfo.buff163.starting_at.doppler[phase]
+        var tbuffVal = buff / 0.64
     }
 
     // if the item is Tiger Tooth => Price with 0.65 --> there is
