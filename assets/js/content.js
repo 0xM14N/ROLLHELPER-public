@@ -1,7 +1,7 @@
 // CONFIG
 webhook = 'INSERT-YOUR-PRIVATE-WEBHOOK-HERE'
-depoAutoAccept = true
-withdrawNotify = true
+depoAutoAccept = false
+withdrawNotify = false
 //-----------------------------------
 
 const itemInfo = {};
@@ -71,11 +71,11 @@ const createButtonCancelDepo = () => {
     button.style.color = "#000000"
     button.style.background = "#e0cf4c"
     button.style.margin = "10px"
-    button.style.padding = "0 20px"
-    button.style.lineHeight = "42px"
+    button.style.padding = "0 10px"
+    button.style.lineHeight = "35px"
     button.style.fontWeight = "bold"
     button.style.border = "solid #21252b 3px"
-    button.style.borderRadius = "10px"
+    button.style.borderRadius = "20px"
     const buttonText = document.createTextNode('DE-LIST')
     button.appendChild(buttonText)
 
@@ -89,12 +89,12 @@ const createButtonCounter = () => {
     button.style.color = "#000000"
     button.style.background = "#e0cf4c"
     button.style.margin = "10px"
-    button.style.padding = "0 20px"
-    button.style.lineHeight = "42px"
+    button.style.padding = "0 10px"
+    button.style.lineHeight = "35px"
     button.style.fontWeight = "bold"
     button.style.border = "solid #21252b 3px"
-    button.style.borderRadius = "10px"
-    const buttonText = document.createTextNode('GET COINS')
+    button.style.borderRadius = "20px"
+    const buttonText = document.createTextNode('COINS')
     button.appendChild(buttonText)
 
     return button
@@ -106,7 +106,7 @@ const coinCounterButton = createButtonCounter()
 
 // PLACE BUTTONS INTO THE MAIN HEADER
 const intFindPlaceForButtons = setInterval(async function() {
-    const mainHeader = document.querySelector("body > cw-root > cw-header > nav > div:nth-child(1)")
+    const mainHeader = document.querySelector("body > cw-root > cw-header > nav > div:nth-child(2)")
 
     if (mainHeader) {
         clearInterval(intFindPlaceForButtons)
