@@ -1,8 +1,7 @@
-// CONFIG
+
 webhook = 'INSERT-YOUR-PRIVATE-WEBHOOK-HERE'
 depoAutoAccept = false
 withdrawNotify = false
-//-----------------------------------
 
 const itemInfo = {};
 var pricesList = {};
@@ -63,7 +62,6 @@ var sendWebHookDiscord = (urlDiscordWebhook = webhook, webhookType, scrapedData 
     })
 }
 
-// BUTTONS
 const createButtonCancelDepo = () => {
     const button = document.createElement('button')
     button.classList.add("cancelDepoButton")
@@ -124,11 +122,9 @@ const intAddEventListeners = setInterval(async function(){
 
     if (cancelBtn && coinsBtn){
         clearInterval(intAddEventListeners)
-
-        // Event listener for cancel depo button
-        cancelBtn.addEventListener("click", function() {
+        cancelBtn.addEventListener("click",function(){
             // de-list script
-            cancelNodes = []
+            cancelNodes = [];
             try {
                 var nodes = document.getElementsByClassName("mat-button-wrapper")
                 // find the nodes with text 'cancel'
@@ -140,36 +136,34 @@ const intAddEventListeners = setInterval(async function(){
                 for (i = 0; i < cancelNodes.length; i++) {
                     cancelNodes[i].click()
                 };
-            } catch (e) {}
-        })
+            } catch (e) {
+                //err
+            }
+        } );
+        coinCounterButton.addEventListener('click', function () {
+                try{
+                    var inv = document.querySelector("cw-steam-inventory-search-grid > form > div.ml-3 > cw-pretty-balance > span").textContent
+                    var balance = document.querySelector("cw-pretty-balance > span").textContent
 
-        // Event listener for coin counter button
-        coinCounterButton.addEventListener('click', async function() {
-            // Coin counting script
+                    var inv_value = parseFloat(inv.replace(',', ''))
+                    var bal_value = parseFloat(balance.replace(',', ''))
+                    var total = Math.round(inv_value + bal_value)
 
-            try{
-                var inv = document.querySelector("cw-steam-inventory-search-grid > form > div.ml-3 > cw-pretty-balance > span").textContent
-                var balance = document.querySelector("cw-pretty-balance > span").textContent
+                    document.getElementsByClassName('counterCoinButton')[0].innerHTML = total
 
-                var inv_clean = inv.replace(',', '')
-                var bal_clean = balance.replace(',', '')
-                var inv_value = parseFloat(inv_clean)
-                var bal_value = parseFloat(bal_clean)
-                var total = Math.round(inv_value + bal_value)
+                    var btnValue = document.getElementsByClassName('counterCoinButton')[0].innerHTML
 
-                document.getElementsByClassName('counterCoinButton')[0].innerHTML = total
-
-                var btnValue = document.getElementsByClassName('counterCoinButton')[0].innerHTML
-
+                    navigator.clipboard.writeText(btnValue)
+                } catch (e){
+                    //err
+                }
+                var btnValue =document.getElementsByClassName('counterCoinButton')[0].innerHTML
+                // Copy the value
                 navigator.clipboard.writeText(btnValue)
-            } catch (e){}
-
-            var btnValue =document.getElementsByClassName('counterCoinButton')[0].innerHTML
-            // Copy the value
-            navigator.clipboard.writeText(btnValue)
-        })
+            }
+        );
     }
-},50)
+},50);
 
 intLookForPopup = setInterval(function(){
     let tempTradeInfo = itemInfo.weapon
@@ -204,4 +198,4 @@ intLookForPopup = setInterval(function(){
             }
         }
     }
-},1000)
+},1000);
