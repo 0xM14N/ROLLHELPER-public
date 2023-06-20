@@ -1,7 +1,7 @@
 {
   "name": "ROLLHELPER",
   "description": "Helping the traders on csgoroll.com",
-  "version": "0.5.1",
+  "version": "0.6",
   "author": "TG",
   "manifest_version": 3,
   "icons": {
