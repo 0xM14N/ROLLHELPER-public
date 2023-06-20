@@ -20,8 +20,8 @@ addForm();
 async function addForm() {
     await getPriceProvider();
     const intervalFindHeader = setInterval(function () {
-        const depo = document.querySelector("body > cw-root > mat-sidenav-container > mat-sidenav-content > div > cw-player-to-player-deposit > cw-steam-inventory-search-grid > form")
-
+        const depo = document.querySelector("body > cw-root > mat-sidenav-container > mat-sidenav-content > div > " +
+            "cw-player-to-player-deposit > cw-steam-inventory-search-grid > form")
         if (depo) {
             clearInterval(intervalFindHeader)
             startMutation();
@@ -32,13 +32,15 @@ async function addForm() {
 function startMutation() {
     const intLookForGrid = setInterval(function () {
 
-        if (document.querySelector("body > cw-root > mat-sidenav-container > mat-sidenav-content > div > cw-player-to-player-deposit > cw-steam-inventory-search-grid > div.ng-star-inserted")) {
+        if (document.querySelector("body > cw-root > mat-sidenav-container > mat-sidenav-content > div > cw-player-to-player-deposit >" +
+            " cw-steam-inventory-search-grid > div.ng-star-inserted")) {
             clearInterval(intLookForGrid);
-            const itemsGrid = document.querySelector("body > cw-root > mat-sidenav-container > mat-sidenav-content > div > cw-player-to-player-deposit > cw-steam-inventory-search-grid > div.ng-star-inserted").children;
+            const itemsGrid = document.querySelector("body > cw-root > mat-sidenav-container > mat-sidenav-content > div > " +
+            "cw-player-to-player-deposit > cw-steam-inventory-search-grid > div.ng-star-inserted").children;
 
-            // make all skins selectable
+            // make all skins visible
             for (let item of itemsGrid) {
-                item.classList.add('selectable')
+                item.firstChild.classList.remove('depleted')
             }
             // set price for each item
             for (let item of itemsGrid) {
@@ -106,26 +108,40 @@ function setBuffValue(item) {
     let itemName = '';
     let is062, is063, is064, is065, is066 = false;
     let isSticker = false;
+    let isStickered = false;
 
 
-    //  weapon type
-    itemInfo.skinWeapon = item.querySelector("footer > div:nth-child(1) > div:nth-child(1)").innerHTML.trim()
-    if(itemInfo.skinWeapon === 'Sticker'){
-        isSticker = true;
-        itemName += 'Sticker | ';
+    //  WEAPON TYPE ===============================================================
+    let stickeredItem = item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(5) > span:nth-child(2)");
+    let normalItem = item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > span:nth-child(2)");
+
+    if (item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > span:nth-child(2)")){
+        itemInfo.skinWeapon = item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > span:nth-child(2)").innerHTML.trim();
+        //is non stickered
+        if(itemInfo.skinWeapon === 'Sticker'){
+            isSticker = true;
+            itemName += 'Sticker | ';
+        }else{
+            itemName += itemInfo.skinWeapon;
+        }
+    }else{
+        //is stickered
+        itemInfo.skinWeapon = item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(5) > span:nth-child(2)").innerHTML.trim();
+        itemName +=  itemInfo.skinWeapon;
+        isStickered = true;
     }
-    else itemName += itemInfo.skinWeapon;
+    // =================================================================================
 
-    // skin name
-    if (item.querySelector("footer > div:nth-child(1) > div:nth-child(2)")) {
-
+    // SKIN NAME  ===============================================================
+    if (item.querySelector("div:nth-child(1) > div:nth-child(1) > label")) {
         if (isSticker){
-            let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
+            //let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
+            let skin = item.querySelector("div:nth-child(1) > div:nth-child(1) > label").innerHTML.trim()
             itemName += skin;
         }
 
         else{
-            let skin = item.querySelector("footer > div:nth-child(1) > div:nth-child(2) > div").innerHTML.trim()
+            let skin = item.querySelector("div:nth-child(1) > div:nth-child(1) > label").innerHTML.trim()
             let nameArr = skin.split(' ')
             let f = nameArr[0]
             let s = nameArr[1]
@@ -158,7 +174,6 @@ function setBuffValue(item) {
                 var phase = 'Emerald'
             }
 
-            //if item is case / pin -> not every item is added yet
             else if (itemInfo.skinWeapon.includes('Case') ||
                 itemInfo.skinWeapon.includes('Pin')){
                 // continue
@@ -174,59 +189,55 @@ function setBuffValue(item) {
             }
         }
     }
+    // =================================================================================
 
-    // skin exterior (for selectable)
-    if (item.querySelector('cw-item > div:nth-child(2) > div:nth-child(2) > cw-item-variant-details')) {
-        let exterior = item.querySelector('cw-item > div:nth-child(2) > div:nth-child(2) > ' +
-            'cw-item-variant-details > div > div').innerHTML.trim()
+    // SKIN EXTERIOR   ===============================================================
+    let exterior
+    let ext = item.querySelector("div:nth-child(1) > div:nth-child(1) >" +
+        " div:nth-child(1) > span:nth-child(2)").innerHTML.trim().split(" ")[0]
 
-        if (isSticker){
-            itemInfo.skinExterior = ' ('+ exterior + ')'
-            let nameArr = itemName.split(' ')
-            let f = 0
-            for (let i=0; i<nameArr.length;i++){
-                if (nameArr[i] === '|'){
-                    f++;
-                    if(f === 2){
-                        nameArr[i-1] += itemInfo.skinExterior;
-                        break;
-                    }
+    if (isSticker){
+        itemInfo.skinExterior = ' ('+ ext + ')'
+        let nameArr = itemName.split(' ')
+        let f = 0
+        for (let i= 0; i < nameArr.length; i++){
+            if (nameArr[i] === '|'){
+                f++;
+                if(f === 2){
+                    nameArr[i-1] += itemInfo.skinExterior;
+                    break;
                 }
             }
-            itemName = nameArr.join(' ')
         }
-
-        else{
-            itemInfo.skinExterior = exterior
-            itemName += " (" + exterior + ")";
+        itemName = nameArr.join(' ')
+    }else{
+        if (ext === 'FN'){
+            itemInfo.skinExterior = exterior;
+            itemName += " (Factory New)" ;
         }
-    }
-
-    // skin exterior (for non-selectable)
-    if (item.querySelector('cw-item > div:nth-child(1) > div:nth-child(2) > cw-item-variant-details')) {
-        let exterior = item.querySelector('cw-item > div:nth-child(1) > div:nth-child(2) > ' +
-            'cw-item-variant-details > div > div').innerHTML.trim()
-
-        if (isSticker){
-            itemInfo.skinExterior = ' ('+ exterior + ')'
-            let nameArr = itemName.split(' ')
-            let f = 0
-            for (let i=0; i<nameArr.length;i++){
-                if (nameArr[i] === '|'){
-                    f++;
-                    if(f === 2){
-                        nameArr[i-1] += itemInfo.skinExterior;
-                        break;
-                    }
-                }
-            }
-            itemName = nameArr.join(' ')
+        if (ext === 'MW') {
+            itemInfo.skinExterior = exterior;
+            itemName += " (Minimal Wear)" ;
         }
-        else{
-            itemInfo.skinExterior = exterior
-            itemName += " (" + exterior + ")";
+        if (ext === 'FT') {
+            itemInfo.skinExterior = exterior;
+            itemName += " (Field-Tested)" ;
+        }
+        if (ext === 'WW'){
+            itemInfo.skinExterior = exterior;
+            itemName += " (Well-Worn)" ;
+        }
+        if (ext === 'BS'){
+            itemInfo.skinExterior = exterior;
+            itemName += " (Battle-Scarred)" ;
+        }
+        if(ext === '\x3C!---->-'){
+            itemInfo.skinExterior = '';
+            itemName += "";
         }
     }
+    // =================================================================================
+
 
     // ======================== PRICING ========================
     // USED TO CALCULATE PRICE => BUFF163 STARTING_AT VALUE (usd)
@@ -240,18 +251,23 @@ function setBuffValue(item) {
     //log(itemName)
     let priceInfo = pricesList[itemName];
 
-    // if the constructed name of skin was not found in the JSON price file go to next item
+    //  if the constructed name of skin was not found in the JSON price file go to next item
     if (priceInfo === undefined) return;
 
-    let rollPrice = Math.floor(item.querySelector('footer > div:nth-child(2) > div >' +
-        ' cw-pretty-balance > span').innerText.replace(',','') * 100) / 100;
+    let rollPrice
+    if (!isStickered) {
+         rollPrice = Math.floor(item.querySelector("div:nth-child(1) > div:nth-child(1) > " +
+            "div:nth-child(6) > cw-pretty-balance > span").innerText.replace(',','') * 100 ) / 100;
+    }else{
+         rollPrice = Math.floor(item.querySelector("div:nth-child(1) > div:nth-child(1) > " +
+            "div:nth-child(7) > cw-pretty-balance > span").innerText.replace(',','') * 100 ) / 100;
+    }
 
     // Find if item is priced by 0.62 by excluded keywords - bad approach
     // playskins for weapon finishes bellow 200c usually belong in this category
     // keywords arr is at the top of the this file
     if((rollPrice < 200) &&
-        (!excludedItemsFrom62.some((v) => itemName.includes(v)) &&
-        !excludedItemsFrom62.some((v) => itemName.includes(v)))){
+        (!excludedItemsFrom62.some((v) => itemName.includes(v)))){
             is062 = true
             var buff = priceInfo.buff163.starting_at.price
             var tbuffVal = priceInfo.buff163.starting_at.price / 0.62
@@ -282,13 +298,18 @@ function setBuffValue(item) {
     let buffVal = Math.floor(tbuffVal * 100) / 100
     let calc =  Math.floor(rollPrice/buffVal*100) - 100
 
-    let parent_el = item.querySelector("footer");
+    //let parent_el = item.querySelector("footer");
+    let parent_el
+    if (!isStickered){
+         parent_el = item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(8)");
+    }else{
+         parent_el = item.querySelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(9)");
+    }
     let res = checkPrice(rollPrice, buffVal)
 
     parent_el.appendChild(drawCustomForm(res, calc));
 
-    // LOGS INTO CONSOLE ABOUT PRICINGS =
-
+   // PRICING LOGS =============
     log(blue,`${itemName}`)
     log(yellow,`\t ROLL PRICE: ${rollPrice} coins`)
     log(yellow,`\t BUFF PRICE: ${buff}$`)
