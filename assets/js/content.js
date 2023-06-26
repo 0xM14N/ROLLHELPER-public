@@ -1,7 +1,6 @@
-
 webhook = 'INSERT-YOUR-PRIVATE-WEBHOOK-HERE'
-depoAutoAccept = false
-withdrawNotify = false
+depoAutoAccept = true
+withdrawNotify = true
 
 const itemInfo = {};
 var pricesList = {};
@@ -175,7 +174,7 @@ intLookForPopup = setInterval(function(){
                 depoReadyBtn.click()
 
                 const intLookForScrape = setInterval(function(){
-                    if(weaponName = document.querySelector("cw-deposit-processing-dialog > mat-dialog-content > cw-item")){
+                    if(weaponName = document.querySelector("cw-deposit-processing-dialog > mat-dialog-content > cw-csgo-market-item-card")){
                         clearInterval(intLookForScrape)
 
                         itemInfo.weapon =  weaponName.innerText
@@ -190,7 +189,7 @@ intLookForPopup = setInterval(function(){
         if (offersBtn = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-actions > a > span.mat-button-wrapper > span")){
             if (withdrawNotify){
 
-                let tradeInfo = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-content > cw-item")
+                let tradeInfo = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-content > cw-csgo-market-item-card")
                 itemInfo.weapon = tradeInfo.innerText
 
                 if (typeof tempTradeInfo == "undefined") sendWebHookDiscord(webhook,swebhookType = 'IncommingTrade', itemInfo)
