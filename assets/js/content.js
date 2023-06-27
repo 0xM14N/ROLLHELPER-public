@@ -1,9 +1,32 @@
-webhook = 'INSERT-YOUR-PRIVATE-WEBHOOK-HERE'
-depoAutoAccept = true
-withdrawNotify = true
-
 const itemInfo = {};
 var pricesList = {};
+updateSettings()
+
+function updateSettings(){
+    chrome.storage.sync.get(["webhook"]).then((res) => {
+        webhook = res.webhook;
+    });
+
+    chrome.storage.sync.get(["switchDepoState"]).then((res) => {
+        depoAutoAccept = res.switchDepoState;
+    });
+
+    chrome.storage.sync.get(["switchNotifyState"]).then((res) => {
+        Notify = res.switchNotifyState;
+    });
+}
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if (msg.webhook){
+        chrome.storage.sync.set({webhook: msg.webhook}).then(() => {
+            alert(`Webhook link has been saved!\n Make sure you pasted correct link in order to recieve notifications`)
+            updateSettings()
+        });
+    };
+    if (msg.update){
+        updateSettings();
+    };
+})
 
 var sendWebHookDiscord = (urlDiscordWebhook = webhook, webhookType, scrapedData = {} ,embeds = []) => {
     const url = urlDiscordWebhook
@@ -110,7 +133,7 @@ const intFindPlaceForButtons = setInterval(async function() {
         mainHeader.appendChild(cancelDepoButton)
         mainHeader.appendChild(coinCounterButton)
     }
-}, 50)
+}, 50);
 
 
 // ADD EVENT LISTENERS FOR BUTTONS
@@ -138,7 +161,7 @@ const intAddEventListeners = setInterval(async function(){
             } catch (e) {
                 //err
             }
-        } );
+        });
         coinCounterButton.addEventListener('click', function () {
                 try{
                     var inv = document.querySelector("cw-steam-inventory-search-grid > form > div.ml-3 > cw-pretty-balance > span").textContent
@@ -172,23 +195,23 @@ intLookForPopup = setInterval(function(){
         if (depoReadyBtn = popup.querySelector("cw-deposit-joined-dialog button")){
             if(depoAutoAccept){
                 depoReadyBtn.click()
+                if (Notify){
+                    const intLookForScrape = setInterval(function(){
+                        if(weaponName = document.querySelector("cw-deposit-processing-dialog > mat-dialog-content > cw-csgo-market-item-card")){
+                            clearInterval(intLookForScrape)
 
-                const intLookForScrape = setInterval(function(){
-                    if(weaponName = document.querySelector("cw-deposit-processing-dialog > mat-dialog-content > cw-csgo-market-item-card")){
-                        clearInterval(intLookForScrape)
-
-                        itemInfo.weapon =  weaponName.innerText
-                        if (typeof tempTradeInfo == "undefined") sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo);
-                        if (tempTradeInfo !== itemInfo.weapon) sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo);
-                    }
-                })
+                            itemInfo.weapon =  weaponName.innerText
+                            if (typeof tempTradeInfo == "undefined") sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo);
+                            if (tempTradeInfo !== itemInfo.weapon) sendWebHookDiscord(webhook,webhookType = 'areYouReady', itemInfo);
+                        }
+                    })
+                }
             }
         }
 
         // WITHDRAW DC NOTIFICATION
         if (offersBtn = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-actions > a > span.mat-button-wrapper > span")){
-            if (withdrawNotify){
-
+            if (Notify){
                 let tradeInfo = document.querySelector("cw-withdraw-processing-dialog > mat-dialog-content > cw-csgo-market-item-card")
                 itemInfo.weapon = tradeInfo.innerText
 
