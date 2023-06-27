@@ -19,6 +19,10 @@
 - Deposit page: Pricing checked by buff163, checks if the items are: Overpriced / Underpriced / Good priced
 - !!! Pricings should not be considered as the moste accurate (still in beta)!!!...
 ------------
-![image](https://github.com/ScriptNation/ROLLHELPER-public/assets/43382783/ed2ce107-355a-4cd6-93f2-ead5d34aae1d)
+
+<p align="center">
+  <img width="460" height="300" src="[https://picsum.photos/460/300](https://github.com/ScriptNation/ROLLHELPER-public/assets/43382783/5ceb6fe5-b6bf-4dcf-9373-f9de8c5965f3)">
+</p>
+
 ![image](https://github.com/ScriptNation/ROLLHELPER-public/assets/43382783/b9efdab2-99da-4a70-92c2-01c7b8802d20)
 
