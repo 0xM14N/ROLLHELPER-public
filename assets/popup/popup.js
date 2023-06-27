@@ -69,7 +69,10 @@ function restoreOptions(){
     });
 
     chrome.storage.sync.get(["webhook"]).then((res) => {
-        if(res.webhook != ''){
+        if(!res.webhook){
+            inputEl.placeholder = "discord webhook"
+        }
+        if(res.webhook){
             inputEl.placeholder = res.webhook
         }
     });
