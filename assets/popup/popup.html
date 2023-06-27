@@ -16,7 +16,6 @@
     <img src="../ico/rollHelper.png" alt="helper-logo" width="95" height="35">
   </a>
 </div>
-
 <div class="container">
   <div class="row">
     <div class="col">
@@ -31,7 +30,7 @@
   <div class="row p-2">
     <div class="col d-flex justify-content-center">
       <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" id="depoSwitch">
         <span class="slider round"></span>
       </label>
     </div>
@@ -42,6 +41,36 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row p-2">
+    <div class="col d-flex justify-content-center">
+      <label class="switch">
+        <input type="checkbox" id="notifySwitch">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="col">
+      <div class="setting-desc">
+        NOTIFICATIONS
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <input type="text" placeholder="discord webhook" class="hookClass" id="webhookInput">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-center m-2">
+      <button class="btn btn-dark" id="saveSettings">SAVE</button>
+    </div>
+  </div>
+</div>
+
 
 <script src="popup.js"></script>
 </body>
