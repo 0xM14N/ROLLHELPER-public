@@ -11,7 +11,8 @@
 
 ### Current functions
 - Deposit Auto-Accept
-- Deposit Discord Notifications (Set webhook into popup)
+- Deposit Discord Notifications (Set webhook discord link into addon popup)
+- if you dont know how to create discord webhook, view: https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 - Withdraw Discord Notifications
 - Mass deposit de-list button
 - Coins counter button
