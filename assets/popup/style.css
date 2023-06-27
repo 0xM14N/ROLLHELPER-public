@@ -78,7 +78,8 @@ body {
     color: white;
     display: flex;
     justify-content: center;
-    font-size: 17px;
+    font-size: 19px;
+    font-weight: bold;
     font-weight: normal;
 }
 
@@ -89,7 +90,6 @@ body {
     font-size: 14px;
     font-weight: normal;
 }
-
 
 .switch {
     position: relative;
@@ -149,4 +149,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+.hookClass{
+   width: 140px;
 }
