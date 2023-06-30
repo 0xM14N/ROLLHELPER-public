@@ -1,8 +1,12 @@
 
 # ROLLHELPER
 
+### Now available on chrome store!
 ------------
-### Installation
+https://chrome.google.com/webstore/detail/rollhelper/ckkehlkflhdbedgaaickpbmaodjaiddm?hl=en
+------------
+------------
+### Installation from github
 1.  Go to [chrome://extensions](chrome://extensions "chrome://extensions")
 2.  Make sure 'Developer  Mode' option is turned on (upper right corner)
 3.  Click 'Load unpacked'
