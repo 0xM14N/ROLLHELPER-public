@@ -1,9 +1,7 @@
-const banner = document.querySelector("body > cw-root > mat-sidenav-container > " +
-    "mat-sidenav-content > div > cw-crash > cw-game-in-maintenance");
-
 const lookForbanner = setInterval(function(){
+    const banner = document.getElementsByTagName('cw-game-in-maintenance')[0]
         if (banner){
-            clearInterval(lookForbanner);
             banner.remove();
+            clearInterval(lookForbanner);
         }
 },50);
