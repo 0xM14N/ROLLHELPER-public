@@ -1,9 +1,9 @@
 
 # ROLLHELPER
 
-### Now available on chrome store!
+### Now *NOT* available on chrome store!
 ------------
-https://chrome.google.com/webstore/detail/rollhelper/ckkehlkflhdbedgaaickpbmaodjaiddm?hl=en
+This extension was not allowed on chrome extension store due to extensions gambling relation
 ------------
 ------------
 ### Installation from github
