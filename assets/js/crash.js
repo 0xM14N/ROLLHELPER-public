@@ -3,7 +3,7 @@ const banner = document.querySelector("body > cw-root > mat-sidenav-container > 
 
 const lookForbanner = setInterval(function(){
         if (banner){
-            clearInterval(look4banner);
+            clearInterval(lookForbanner);
             banner.remove();
         }
 },50);
